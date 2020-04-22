@@ -40,10 +40,10 @@ def main():
     dataset_root = os.path.join(current_directory, dataset_root)
     result_root = 'result_xception'
     result_root = os.path.join(current_directory, result_root)
-    epochs_pre = 1#5
-    epochs_fine = 1#50
+    epochs_pre = 5
+    epochs_fine = 50
     batch_size_pre = 32
-    batch_size_fine = 32#16
+    batch_size_fine = 16
     lr_pre = 1e-3
     lr_fine = 1e-4
     train_split = 0.7
