@@ -1,4 +1,4 @@
-# Credit to github.com/DariusAF
+# Credit to github.com/DariusAF for the implementation
 # -*- coding:utf-8 -*-
 
 from keras.models import Model as KerasModel
@@ -23,7 +23,11 @@ class Classifier:
     def load(self, path):
         self.model.load_weights(path)
 
+    def save(self, path):
+        self.model.save(path)
 
+
+# Can ignore this model to focus on the other 2
 class Meso1(Classifier):
     """
     Feature extraction + Classification
