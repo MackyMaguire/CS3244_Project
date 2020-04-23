@@ -1,19 +1,25 @@
 # DeepFakeDetection
 
-## Folder Structure:
-- videos
-  - Fake
-      - 1
-          - 1.jpg
-          - 2.jpg
-          - ...
-      - 2
-      - ...
-  - Real
-      - 1
-          - 1.jpg
-          - 2.jpg
-          - ...
-      - 2
-      - ...
-- result_xception *(created by xcept.py)*
+## Download Folder Structure:
+- /project
+    - model python file here
+    - /data
+        - /manipulated_sequences
+            - /DeepFakeDection (3068)
+                - /c23
+                    - /videos
+                        - .mp4 files
+            - /Deepfakes (1000)
+            - /Face2Face (1000)
+            - /FaceSwap (1000)
+            - /NeuralTextures (1000)
+        - /original_sequences
+            - /actors (363)
+                - /c23
+                    - /videos
+                        - .mp4 files
+            - /youtube (1000)
+             
+## Folder Structure Required Before ExtractFrame:
+
+## Folder Structure After ExtractFrame:
