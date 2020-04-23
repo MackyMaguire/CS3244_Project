@@ -3,6 +3,7 @@
 ## Download Folder Structure:
 - /project
     - model python file here
+    - ExtractFrames.py here
     - /data
         - /manipulated_sequences
             - /DeepFakeDection (3068)
@@ -19,7 +20,23 @@
                     - /videos
                         - .mp4 files
             - /youtube (1000)
-             
+            
 ## Folder Structure Required Before ExtractFrame:
 
 ## Folder Structure After ExtractFrame:
+- /project
+    - ExtractFrames.py here
+    - /data
+    - /Train
+        - /Real
+            - /Frames
+                - /1
+                    - .jpg files
+                - /2
+            - /Videos
+                - 1.mp4
+                - 2.mp4
+        - /Fake
+    - /Test
+        - /Real
+        - /Fake
