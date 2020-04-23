@@ -1,7 +1,3 @@
-'''
-pip install opencv-python
-'''
-
 import os
 import face_recognition
 from os.path import join
