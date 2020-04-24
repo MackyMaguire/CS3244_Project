@@ -5,8 +5,9 @@ import os
 from os.path import join
 from shutil import copy
 from cv2 import VideoCapture, imread, imwrite, imshow, rectangle, cvtColor, COLOR_BGR2RGB
+from functools import cmp_to_key
 
-def processVideo(frames, src, realfake, counter):
+def processVideo(src, realfake, counter):
     #Split train:test 3:1
     rand = random.random()
     traintest = 'Train'
@@ -38,10 +39,13 @@ def extractFrames(frames, src, dst):
 
         #Extract face, with 25 pixels margin
         loc = face_recognition.face_locations(frame)
-        for (top, right, bottom, left) in loc:
-            rectangle(frame, (left - 25, top - 25), (right + 25, bottom + 25), (0, 0, 255), 2)
-        face = frame[top - 25 : bottom + 25, left - 25 : right + 25]
 
+        if (len(loc) == 0):
+            face = frame
+        else:
+            sorted(loc, key=cmp_to_key(lambda x , y: (x[2] - x[0]) * (x[1] - x[3]) - (y[2] - y[0]) * (y[1] - y[3])))
+            face = frame[loc[0][0] - 25 : loc[0][2] + 25, loc[0][3] - 25 : loc[0][1] + 25]
+        
         imwrite(join(dst, '%d.jpg' % frame_num), face)
         frame_num += 1
         
@@ -73,13 +77,13 @@ def main():
     for path in REAL_PATHS:
         for video in os.listdir(path):
             src = join(path, video)
-            processVideo(frames, src, 'Real', real_counter)
+            processVideo(src, 'Real', real_counter)
             real_counter += 1
         
     for path in FAKE_PATHS: 
         for video in os.listdir(path):
             src = join(path, video)
-            processVideo(frames, src, 'Fake', fake_counter)
+            processVideo(src, 'Fake', fake_counter)
             fake_counter += 1
 
 if __name__ == "__main__":
