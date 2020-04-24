@@ -7,7 +7,7 @@ from shutil import copy
 from cv2 import VideoCapture, imread, imwrite, imshow, rectangle, cvtColor, COLOR_BGR2RGB
 from functools import cmp_to_key
 
-def processVideo(src, realfake, counter):
+def processVideo(frames, src, realfake, counter):
     #Split train:test 3:1
     rand = random.random()
     traintest = 'Train'
@@ -77,13 +77,13 @@ def main():
     for path in REAL_PATHS:
         for video in os.listdir(path):
             src = join(path, video)
-            processVideo(src, 'Real', real_counter)
+            processVideo(frames, src, 'Real', real_counter)
             real_counter += 1
         
     for path in FAKE_PATHS: 
         for video in os.listdir(path):
             src = join(path, video)
-            processVideo(src, 'Fake', fake_counter)
+            processVideo(frames, src, 'Fake', fake_counter)
             fake_counter += 1
 
 if __name__ == "__main__":
