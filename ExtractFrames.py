@@ -1,6 +1,7 @@
 
 import face_recognition
 import random
+import cv2
 import os
 from os.path import join
 from shutil import copy
@@ -46,13 +47,14 @@ def extractFrames(frames, src, dst):
             loc = sorted(loc, key=cmp_to_key(lambda x, y: (y[2] - y[0]) * (y[1] - y[3]) - (x[2] - x[0]) * (x[1] - x[3])))
             face = frame[loc[0][0] - 25 : loc[0][2] + 25, loc[0][3] - 25 : loc[0][1] + 25]
         
+        face = cv2.resize(face, (299, 299))
         imwrite(join(dst, '%d.jpg' % frame_num), face)
         frame_num += 1
         
     reader.release()
 
 def main(): 
-    frames = int(input("Enter desired number of frames to extract: "))
+    frames = 40
 
     #Refer to README.md for outputted folder structure
     for x in ['Train', 'Test']:
