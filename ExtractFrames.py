@@ -43,7 +43,7 @@ def extractFrames(frames, src, dst):
         if (len(loc) == 0):
             face = frame
         else:
-            sorted(loc, key=cmp_to_key(lambda x , y: (x[2] - x[0]) * (x[1] - x[3]) - (y[2] - y[0]) * (y[1] - y[3])))
+            loc = sorted(loc, key=cmp_to_key(lambda x, y: (y[2] - y[0]) * (y[1] - y[3]) - (x[2] - x[0]) * (x[1] - x[3])))
             face = frame[loc[0][0] - 25 : loc[0][2] + 25, loc[0][3] - 25 : loc[0][1] + 25]
         
         imwrite(join(dst, '%d.jpg' % frame_num), face)
