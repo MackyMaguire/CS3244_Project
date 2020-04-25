@@ -296,7 +296,7 @@ def main():
             correct_counter += 1
 
     print("==== Predict Correct Video: %d ====" % (correct_counter))
-    print("==== Total Test Video: %d ===="len(test_input_paths))
+    print("==== Total Test Video: %d ====" % (len(test_input_paths)))
     test_acc = correct_counter / len(test_input_paths)
     print("===== Test Accuracy: %.2f =====" % (test_acc))
 
