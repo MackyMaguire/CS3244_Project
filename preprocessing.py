@@ -73,6 +73,7 @@ def video_generator(real_path, fake_path, img_size = 299,
     
     # we use this object to preprocess video
     train_datagen = ImageDataGenerator(samplewise_center=True)
+    fitted = False
     
     total_real, total_fake = start_idx
     
@@ -87,35 +88,47 @@ def video_generator(real_path, fake_path, img_size = 299,
         sequence = np.zeros(frame, img_size, img_size, 3)
         for folder,num,total in [(real_path, real_num, total_real), 
                             (fake_path, fake_num, total_fake)]:
-            
-            for i in range(total,num+total):
+            i = total
+            Ter = len(os.listdir(folder))
+            j = 0
+            while j < num:
                 src = join(folder, str(i))
-                counter_frame = 0
+                if i > Ter:
+                    break
+                if frame > len(os.listdir(src)):
+                    i += 1
+                    continue
                 
-                # must ensure frame <= len(os.listdir(src))
+                counter_frame = 0 
+            
                 for img in os.listdir(src):
                     img_src = join(src, img)
                     img_array = cv2.imread(img_src)
                     img_array = cv2.resize(img_array, (img_size, img_size), 
-                                         interpolation = cv2.INTER_CUBIC)
+                                          interpolation = cv2.INTER_CUBIC)
                     
                     sequence[counter_frame] = img_array
                     counter_frame += 1
                     if counter_frame >= frame:
                         break
-                
-                if not (total_real - start_idx[0]):
-                    train_datagen.fit(sequence)
                     
+                if not fitted:
+                    train_datagen.fit(sequence)
+                    fitted = True
+                
                 X[counter] = train_datagen.standardize(sequence)
                 counter += 1
+                j += 1
+                i += 1
             
-            total_real += real_num 
-            total_fake += fake_num 
+        total_real += real_num 
+        total_fake += fake_num 
             
-            # reshuffle the batch to make trained model more robust
-            np.random.shuffle(index)
+        # reshuffle the batch to make trained model more robust
+        np.random.shuffle(index)
         
+        if counter < batch_size:
+            yield(np.array([]),np.array([]))
         # use yield here instead of return so the function will only
         # return values unless being called again by the model
         yield (X[index], y[index])
@@ -129,5 +142,5 @@ def video_generator(real_path, fake_path, img_size = 299,
 # Here we have 10 videos per batch (5 real, 5 fake),
 # and 200 videos in total (20 batches per epoch)
         
-        
+
     
