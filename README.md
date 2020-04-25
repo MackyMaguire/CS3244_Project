@@ -21,7 +21,6 @@
                         - .mp4 files
             - /youtube (1000)
             
-## Folder Structure Required Before ExtractFrame:
 
 ## Folder Structure After ExtractFrame:
 - /project
