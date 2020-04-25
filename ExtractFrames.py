@@ -12,7 +12,7 @@ def processVideo(frames, src, realfake, counter):
     #Split train:test 3:1
     rand = random.random()
     traintest = 'Train'
-    if rand > 0.75:
+    if rand > 0.85:
         traintest = 'Test'
 
     #Extract face frames from each video
