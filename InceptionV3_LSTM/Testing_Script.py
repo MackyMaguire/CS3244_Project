@@ -25,7 +25,7 @@ total_step = (len(real_lst)+len(real_lst))//batch_size+1
 model = load_model("InceptionV3_LSTM(Trained)")
 
 result = model.evaluate_generator(
-    video_generator_test(test_real_path, test_fake_path, img_size = 299, 
+    video_generator_test(real_path, fake_path, img_size = 299, 
                     frame = 40, batch_size = batch_size), 
     steps = total_step)
 
