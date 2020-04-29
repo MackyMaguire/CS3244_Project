@@ -14,7 +14,7 @@ fake_lst = []
 
 for folder, lst, label in [(real_path,real_lst,False), (fake_path,fake_lst,True)]:
     for video in os.listdir(folder):
-        src = join(folder,video)
+        src = os.path.join(folder,video)
         if frame <= len(os.listdir(src)):
             lst.append((src,label))
 
