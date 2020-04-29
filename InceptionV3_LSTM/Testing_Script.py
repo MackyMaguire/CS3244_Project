@@ -26,7 +26,7 @@ model = load_model("InceptionV3_LSTM(Trained)")
 
 result = model.evaluate_generator(
     video_generator_test(test_real_path, test_fake_path, img_size = 299, 
-                    frame = 40, batch_size = 2), 
+                    frame = 40, batch_size = batch_size), 
     steps = total_step)
 
 with open("result.txt", 'w') as f:
