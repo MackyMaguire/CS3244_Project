@@ -22,6 +22,9 @@ class Classifier:
 
     def load(self, path):
         self.model.load_weights(path)
+        
+    def save(self, path):
+        self.model.save(path)
 
 '''
 class Meso1(Classifier):
@@ -49,7 +52,7 @@ class Meso1(Classifier):
 
 
 class Meso4(Classifier):
-    def __init__(self, learning_rate = 0.001):
+    def __init__(self, learning_rate = 0.001, IMGWIDTH =IMGWIDTH):
         self.name = "Meso4"
         self.model = self.init_model()
         optimizer = Adam(lr = learning_rate)
