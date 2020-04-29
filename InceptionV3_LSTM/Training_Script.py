@@ -1,10 +1,13 @@
+import os
 from InceptionV3_LSTM import load_model, save_model
 from preprocessing import video_generator, video_generator_test
 
+current_directory = os.path.dirname(os.path.abspath(__file__))
 
-train_real_path = ""
-train_fake_path = ""
-batch_size = 0
+real_path = os.path.join(current_directory,"Train/Real/Frames")
+fake_path = os.path.join(current_directory,"Train/Fake/Frames")
+batch_size = 32
+frame = 40
 
 real_lst = []
 fake_lst = []
