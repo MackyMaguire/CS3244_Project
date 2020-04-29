@@ -23,7 +23,7 @@ total_step = min(len(real_lst),len(fake_lst))*2//batch_size+1
 model = load_model("InceptionV3_LSTM")
 
 model.fit_generator(
-    video_generator(train_real_path, train_fake_path, img_size = 299, 
+    video_generator(real_path, fake_path, img_size = 299, 
                     frame = 40, batch_size = batch_size),
     steps_per_epoch = total_step)
 
