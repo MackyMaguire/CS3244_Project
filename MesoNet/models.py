@@ -22,37 +22,12 @@ class Classifier:
 
     def load(self, path):
         self.model.load_weights(path)
-        
+
     def save(self, path):
         self.model.save(path)
 
-'''
-class Meso1(Classifier):
-    """
-    Feature extraction + Classification
-    """
-    def __init__(self, learning_rate = 0.001, dl_rate = 1):
-        self.model = self.init_model(dl_rate)
-        optimizer = Adam(lr = learning_rate)
-        self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
-
-    def init_model(self, dl_rate):
-        x = Input(shape = (IMGWIDTH, IMGWIDTH, 3))
-
-        x1 = Conv2D(16, (3, 3), dilation_rate = dl_rate, strides = 1, padding='same', activation = 'relu')(x)
-        x1 = Conv2D(4, (1, 1), padding='same', activation = 'relu')(x1)
-        x1 = BatchNormalization()(x1)
-        x1 = MaxPooling2D(pool_size=(8, 8), padding='same')(x1)
-
-        y = Flatten()(x1)
-        y = Dropout(0.5)(y)
-        y = Dense(1, activation = 'sigmoid')(y)
-        return KerasModel(inputs = x, outputs = y)
-'''
-
-
 class Meso4(Classifier):
-    def __init__(self, learning_rate = 0.001, IMGWIDTH =IMGWIDTH):
+    def __init__(self, learning_rate = 0.001, IMGWIDTH = IMGWIDTH):
         self.name = "Meso4"
         self.model = self.init_model()
         optimizer = Adam(lr = learning_rate)
@@ -92,19 +67,19 @@ class Meso4(Classifier):
 
     def freeze(self):
         # freeze all except output layer
-        for layer in self.model[:-1]:
+        for layer in self.model.layers[:-1]:
             layer.trainable = False
         optimizer = Adam(lr = 0.001)
         self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
 
     def unfreeze(self):
-        for layer in self.model[:-1]:
+        for layer in self.model.layers[:-1]:
             layer.trainable = True
         optimizer = Adam(lr = 0.001)
         self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
 
 class MesoInception4(Classifier):
-    def __init__(self, learning_rate = 0.001):
+    def __init__(self, learning_rate = 0.001, IMGWIDTH = IMGWIDTH):
         self.name = "MesoInception4"
         self.model = self.init_model()
         optimizer = Adam(lr = learning_rate)
@@ -161,13 +136,13 @@ class MesoInception4(Classifier):
         self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
 
     def freeze(self):
-        for layer in self.model[:-1]:
+        for layer in self.model.layers[:-1]:
             layer.trainable = False
         optimizer = Adam(lr = 0.001)
         self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
 
     def unfreeze(self):
-        for layer in self.model[:-1]:
+        for layer in self.model.layers[:-1]:
             layer.trainable = True
         optimizer = Adam(lr = 0.001)
         self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
