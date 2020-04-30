@@ -32,11 +32,11 @@ def main():
     x_test, y_test = load_data(real_path,fake_path, num_sample = (1,1))
     
     meso4 = Meso4()
-    meso4.load(os.path.join(current_directory,'weights/Meso4_DF'))
+    meso4.load(os.path.join(current_directory,'Meso4.h5'))
     evaluate_model(meso4.model, x_test, y_test)
 
     meso4 = MesoInception4()
-    meso4.load(os.path.join(current_directory,'weights/MesoInception_DF'))
+    meso4.load(os.path.join(current_directory,'MesoInception.h5'))
     evaluate_model(meso4.model, x_test, y_test)
 
 if __name__ == '__main__':
