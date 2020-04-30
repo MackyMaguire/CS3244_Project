@@ -1,12 +1,9 @@
-
-import face_recognition
 import random
 import cv2
 import os
 from os.path import join
 from shutil import copy
-from cv2 import VideoCapture, imread, imwrite, imshow, rectangle, cvtColor, COLOR_BGR2RGB
-from functools import cmp_to_key
+from cv2 import VideoCapture, imwrite
 
 def processVideo(frames, src, realfake, counter):
     #Split train:test 3:1
@@ -38,7 +35,8 @@ def extractFrames(frames, src, dst):
         if frame_num > frames:
             break
 
-        #Extract face, with 25 pixels margin
+        ''' 
+        #Old method using face_locations library
         loc = face_recognition.face_locations(frame)
 
         if (len(loc) == 0):
@@ -46,7 +44,21 @@ def extractFrames(frames, src, dst):
         else:
             loc = sorted(loc, key=cmp_to_key(lambda x, y: (y[2] - y[0]) * (y[1] - y[3]) - (x[2] - x[0]) * (x[1] - x[3])))
             face = frame[loc[0][0] - 25 : loc[0][2] + 25, loc[0][3] - 25 : loc[0][1] + 25]
-        
+        ''' 
+
+        #Extract faces in frame using CV's CascadeClassifier
+        #Each face is a list (starting x, starting y, width, height)
+        faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+        faces = faceCascade.detectMultiScale(frame, scaleFactor=1.3, minNeighbors=3, minSize=(30, 30))
+
+        if (len(faces) == 0):
+            face = frame
+        else:
+            #Sort faces in increasing size, then extract largest face with 25 pixels margin
+            faces = sorted(faces, key=lambda x: - x[2] * x[3])
+            (x, y, w, h) = faces[0]
+            face = frame[y - 25 : y + h + 25, x - 25 : x + w + 25]
+
         face = cv2.resize(face, (299, 299))
         imwrite(join(dst, '%d.jpg' % frame_num), face)
         frame_num += 1
