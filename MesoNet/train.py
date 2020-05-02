@@ -83,7 +83,7 @@ def main():
     fake_path = os.path.join(current_directory,"Train/Fake/Frames")
 
     # To change to num_sample = (number_of_real_vids, number_of_fake_vids)
-    x_train, y_train = load_data(real_path,fake_path, num_sample = (1,1))
+    x_train, y_train = load_data(real_path,fake_path, num_sample = (1164,6026))
     
     dataGenerator = ImageDataGenerator(
         rescale=1./255,
