@@ -29,7 +29,7 @@ def main():
     fake_path = os.path.join(current_directory,"Train/Fake/Frames")
 
     # To change to num_sample = (number_of_real_vids, number_of_fake_vids)
-    x_test, y_test = load_data(real_path,fake_path, num_sample = (1,1))
+    x_test, y_test = load_data(real_path,fake_path, num_sample = (199,1042))
     
     meso4 = Meso4()
     meso4.load(os.path.join(current_directory,'Meso4.h5'))
