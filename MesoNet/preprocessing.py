@@ -31,9 +31,5 @@ def load_data(real_path, fake_path, num_sample = (1,1),
             for i in range(len(sequence)):
               X[counter+i] = sequence[i]
             counter += frame
-    
-    perm = np.random.permutation(len(X))
-    X = X[perm]
-    y = y[perm]
 
     return X, y
