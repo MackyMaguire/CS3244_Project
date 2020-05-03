@@ -1,17 +1,10 @@
 from keras.models import load_model
 from keras.preprocessing.image import ImageDataGenerator
 
-import statistics
 import numpy as np
 
 from models import *
 from preprocessing import *
-
-'''
-def test_generator(X, y, dataGenerator, batch_size):
-  for x_batch, y_batch in dataGenerator.flow(X, y, batch_size):
-    yield(x_batch, y_batch)
-'''
 
 def evaluate_model(model, x_test, y_test):
   num_videos = len(x_test) // 40
@@ -35,7 +28,7 @@ def main():
     fake_path = os.path.join(current_directory,"Test/Fake/Frames")
 
     # To change to num_sample = (number_of_real_vids, number_of_fake_vids)
-    x_test, y_test = load_data(real_path,fake_path, num_sample = (2,8))
+    x_test, y_test = load_data(real_path,fake_path, num_sample = (1,1))
     
     meso4 = Meso4()
     meso4.load(os.path.join(current_directory,'Meso4.h5'))
@@ -47,3 +40,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
