@@ -42,9 +42,9 @@ def main():
     meso4.load(os.path.join(current_directory,'Meso4.h5'))
     evaluate_model(meso4.model, real_path, fake_path)
 
-    meso4 = MesoInception4()
-    meso4.load(os.path.join(current_directory,'MesoInception.h5'))
-    evaluate_model(meso4.model, real_path, fake_path)
+    mesoInception4 = MesoInception4()
+    mesoInception4.load(os.path.join(current_directory,'MesoInception.h5'))
+    evaluate_model(mesoInception4.model, real_path, fake_path)
 
 if __name__ == '__main__':
     main()
