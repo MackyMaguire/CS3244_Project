@@ -48,7 +48,7 @@ def main():
     # /project/result_xception
 
     epochs_pre = 1 #5
-    epochs_fine = 1 #20 #50
+    epochs_fine = 5 #50
     batch_size_pre = 32
     batch_size_fine = 16
     lr_pre = 1e-3

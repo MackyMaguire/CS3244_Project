@@ -23,8 +23,8 @@ def train_model(model, dataGenerator, real_path, fake_path, epochs):
             for x_train, y_train in load_data_generator(real_path, fake_path):
               for x_batch, y_batch in dataGenerator.flow(x_train, y_train, batch_size=40):
                   hist = model.fit(x_batch, y_batch)
-                  batch_loss.append(hist[0])
-                  batch_accuracy.append(hist[1])
+                  batch_loss.append(hist[0].item())
+                  batch_accuracy.append(hist[1].item())
                   batches += 1
                   if batches >= len(x_train) / 40:
                       # we need to break the loop by hand because
@@ -100,7 +100,7 @@ def main():
 
     # MesoInception4
     mesoInception4 = MesoInception4()
-    mesoInception4.load('weights/MesoInception4_DF')
+    mesoInception4.load('weights/MesoInception_DF')
     print("Now training: mesoInception4")
     train_and_plot(mesoInception4, dataGenerator, real_path, fake_path)
 

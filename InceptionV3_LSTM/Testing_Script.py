@@ -22,7 +22,7 @@ for folder, lst, label in [(real_path,real_lst,False), (fake_path,fake_lst,True)
 
 total_step = (len(real_lst)+len(real_lst))//batch_size+1
 
-model = load_model("InceptionV3_LSTM(Trained)")
+model = load_model("InceptionV3_LSTM_Trained")
 
 result = model.evaluate_generator(
     video_generator_test(real_path, fake_path, img_size = 299, 

@@ -27,4 +27,4 @@ model.fit_generator(
                     frame = 40, batch_size = batch_size),
     steps_per_epoch = total_step)
 
-save_model(model,"InceptionV3_LSTM(Trained)")
+save_model(model,"InceptionV3_LSTM_Trained")
