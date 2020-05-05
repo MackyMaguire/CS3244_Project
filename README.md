@@ -1,4 +1,5 @@
 # DeepFakeDetection
+Team members: [Cai Ruicong](https://github.com/ray-97), [Choo Ze Yuan](https://github.com/Raikonen), [Huang Linhang](https://github.com/3anlang), [Ye Chenchen](https://github.com/IYVVVVV), [Zhang Xinran](https://github.com/Zhang-Xinran), [Zhou Tianyu](https://github.com/MackyMaguire)
 
 ## Download Folder Structure:
 - /project
